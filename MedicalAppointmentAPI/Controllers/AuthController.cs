@@ -11,4 +11,10 @@ public class AuthController : ControllerBase
   {
     return Ok();
   }
+
+  [HttpPost("register")]
+  public async Task<IActionResult> Register()
+  {
+    return Ok();
+  }
 }

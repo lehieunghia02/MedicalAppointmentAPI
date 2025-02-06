@@ -25,17 +25,21 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Add DbContext 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+           .ConfigureWarnings(warnings =>
+                warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning))
+);
 
 //Add Identity 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     //Password settings 
-    options.Password.RequireDigit = false;
-    options.Password.RequiredLength = SystemConstants.Validation.MinPasswordLength;
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
     options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
 
     //Lockout settings 
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
