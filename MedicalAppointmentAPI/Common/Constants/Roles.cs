@@ -2,13 +2,7 @@ namespace MedicalAppointmentAPI.Common.Constants
 {
   public static class Roles
   {
-    /**
-    * Administrator 
-      Doctor 
-      Receptionist
-      Admin
-      Pharmacist 
-    */
+    public const string SuperAdmin = "SuperAdmin";
     public const string Admin = "Admin";
     public const string Doctor = "Doctor";
     public const string Patient = "Patient";
@@ -17,11 +11,12 @@ namespace MedicalAppointmentAPI.Common.Constants
 
     public static readonly IReadOnlyCollection<string> All = new[]
     {
-            Admin,
-            Doctor,
-            Patient,
-            Receptionist,
-            Pharmacist
+      SuperAdmin,
+      Admin,
+      Doctor,
+      Patient,
+      Receptionist,
+      Pharmacist
     };
   }
 }

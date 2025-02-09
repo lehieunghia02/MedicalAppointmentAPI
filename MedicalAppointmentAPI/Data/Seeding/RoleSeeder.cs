@@ -11,6 +11,12 @@ public static class RoleSeeder
     builder.Entity<IdentityRole>().HasData(
       new IdentityRole
       {
+        Name = Roles.SuperAdmin,
+        NormalizedName = Roles.SuperAdmin.ToUpper(),
+        ConcurrencyStamp = Guid.NewGuid().ToString()
+      },
+      new IdentityRole
+      {
         Name = Roles.Admin,
         NormalizedName = Roles.Admin.ToUpper(),
         ConcurrencyStamp = Guid.NewGuid().ToString()

@@ -1,7 +1,13 @@
 using System.Text;
+using Common.Configurations.Interfaces;
+using MedicalAppointmentAPI.Common.Configurations;
 using MedicalAppointmentAPI.Common.Constants;
 using MedicalAppointmentAPI.Data;
 using MedicalAppointmentAPI.Models;
+using MedicalAppointmentAPI.Repositories.Implementations;
+using MedicalAppointmentAPI.Repositories.Interfaces;
+using MedicalAppointmentAPI.Services.Implementations;
+using MedicalAppointmentAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,12 +32,13 @@ builder.Services.AddSwaggerGen(c =>
 
 // Add DbContext 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-           .ConfigureWarnings(warnings =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")).ConfigureWarnings(warnings =>
                 warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning))
 );
-
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtSettings"));
+builder.Services.AddScoped<IJwtSettings, JwtConfig>();
 //Add Identity 
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     //Password settings 
@@ -51,13 +58,21 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedEmail = true;
 }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-//Configure JWT Authentication 
+//Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings["SecretKey"];
+
+if (string.IsNullOrEmpty(secretKey))
+{
+    throw new ArgumentNullException("JWT Secret key is not configured");
+}
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+})
+.AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -68,11 +83,14 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtSettings["Issuer"],
         ValidAudience = jwtSettings["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(jwtSettings["Secret"]!))
+            Encoding.UTF8.GetBytes(secretKey))
     };
 });
-
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

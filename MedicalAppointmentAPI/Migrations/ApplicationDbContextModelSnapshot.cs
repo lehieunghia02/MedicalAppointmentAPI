@@ -44,10 +44,10 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -61,9 +61,8 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -100,7 +99,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("RefreshTokenExpiryTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -109,7 +108,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -151,7 +150,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
@@ -167,7 +166,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -220,36 +219,43 @@ namespace MedicalAppointmentAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7889f413-0d50-49c9-97b9-8f9cc9149fb2",
-                            ConcurrencyStamp = "95cdea81-c549-4af3-b089-7c0088042576",
+                            Id = "c1f61ac0-04bf-464e-bf5f-11ceb5940913",
+                            ConcurrencyStamp = "e3c3f61d-f4fb-40a6-aa37-2ca77764b7c7",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        },
+                        new
+                        {
+                            Id = "97f653ee-024b-41fb-b39f-a0871450f5e8",
+                            ConcurrencyStamp = "b0a8548d-d84d-4381-bb66-566f051a5b73",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "06d4b4a3-6030-486f-a225-450eb12909d0",
-                            ConcurrencyStamp = "9b0c99ec-d695-44d0-b9d8-a3f0780bbe67",
+                            Id = "ba3341cc-6d13-49f2-9161-586d68d88d14",
+                            ConcurrencyStamp = "45dd810e-4289-4f4b-9872-ef84f1732d37",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "685b1a83-630a-4e6e-ae7f-7894ce5b659f",
-                            ConcurrencyStamp = "fde74035-5647-4aae-9a80-3005c13a2f34",
+                            Id = "e0be4ada-9590-4c14-84f0-5d9083fe6b21",
+                            ConcurrencyStamp = "95362b76-e217-4e29-8506-9a89d68b1675",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "165c7464-5432-4c90-b71f-445886acaa5d",
-                            ConcurrencyStamp = "bdb5d28e-b9e1-46c0-916f-f0ce9bf03e92",
+                            Id = "79f2f034-2c79-4856-a566-eb1f9faa5dfd",
+                            ConcurrencyStamp = "507610d3-3791-4576-a7d7-57984749f2c9",
                             Name = "Receptionist",
                             NormalizedName = "RECEPTIONIST"
                         },
                         new
                         {
-                            Id = "78b1eaa5-fe69-4aed-9fd2-bc6703ba4a06",
-                            ConcurrencyStamp = "2a7477ea-c89b-4c29-943f-3673f769a4d3",
+                            Id = "d92077e9-d815-4d9f-8840-69ec301b1e3d",
+                            ConcurrencyStamp = "3f26f033-a840-482f-a92a-0c1ab133fa74",
                             Name = "Pharmacist",
                             NormalizedName = "PHARMACIST"
                         });
@@ -376,7 +382,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
@@ -402,7 +408,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.HasKey("Id");
 
@@ -428,7 +434,7 @@ namespace MedicalAppointmentAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
@@ -443,7 +449,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.HasKey("Id");
 
@@ -453,47 +459,47 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8905),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7978),
                             Description = "Trạng thái đã đặt lịch",
                             IsActive = true,
                             Name = "Đã đặt lịch",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8905)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7979)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8910),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7991),
                             Description = "Trạng thái đã được xác nhận",
                             IsActive = true,
                             Name = "Đã xác nhận",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8910)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7991)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8912),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7993),
                             Description = "Trạng thái đã hoàn thành",
                             IsActive = true,
                             Name = "Đã hoàn thành",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8912)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7993)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8913),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7995),
                             Description = "Trạng thái đã hủy bỏ",
                             IsActive = true,
                             Name = "Hủy bỏ",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8914)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7995)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8915),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7996),
                             Description = "Trạng thái không đúng hẹn",
                             IsActive = true,
                             Name = "Không đúng hẹn",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(8915)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(7997)
                         });
                 });
 
@@ -511,7 +517,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -542,7 +548,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
@@ -556,7 +562,7 @@ namespace MedicalAppointmentAPI.Migrations
                         {
                             Id = 1,
                             Address = "123 Nguyễn Văn Linh, Quận 7, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5386),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5317),
                             Description = "Phòng khám đa khoa với đội ngũ bác sĩ chuyên môn cao và trang thiết bị hiện đại",
                             Email = "contact@qte-clinic.com",
                             ImageUrl = "https://example.com/images/clinic1.jpg",
@@ -564,14 +570,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Đa Khoa Quốc Tế",
                             OpeningHours = "7:00 - 20:00",
                             Phone = "028.7123.4567",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5387),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5318),
                             Website = "https://qte-clinic.com"
                         },
                         new
                         {
                             Id = 2,
                             Address = "456 Lê Văn Việt, Quận 9, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5393),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5322),
                             Description = "Chuyên khoa sản phụ khoa với các dịch vụ chăm sóc toàn diện cho phụ nữ",
                             Email = "info@hanhphuc-clinic.com",
                             ImageUrl = "https://example.com/images/clinic2.jpg",
@@ -579,14 +585,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Sản Phụ Khoa Hạnh Phúc",
                             OpeningHours = "7:30 - 19:30",
                             Phone = "028.7234.5678",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5394),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5323),
                             Website = "https://hanhphuc-clinic.com"
                         },
                         new
                         {
                             Id = 3,
                             Address = "789 Phan Văn Trị, Quận Gò Vấp, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5396),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5326),
                             Description = "Phòng khám chuyên khoa nhi với môi trường thân thiện cho trẻ em",
                             Email = "care@kids-clinic.com",
                             ImageUrl = "https://example.com/images/clinic3.jpg",
@@ -594,14 +600,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Nhi Thiên Thần Nhỏ",
                             OpeningHours = "7:00 - 19:00",
                             Phone = "028.7345.6789",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5397),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5326),
                             Website = "https://kids-clinic.com"
                         },
                         new
                         {
                             Id = 4,
                             Address = "321 Võ Văn Ngân, TP.Thủ Đức, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5399),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5329),
                             Description = "Chuyên khoa tim mạch với các trang thiết bị chẩn đoán hiện đại",
                             Email = "info@tamduc-cardio.com",
                             ImageUrl = "https://example.com/images/clinic4.jpg",
@@ -609,14 +615,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Tim Mạch Tâm Đức",
                             OpeningHours = "8:00 - 17:00",
                             Phone = "028.7456.7890",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5400),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5329),
                             Website = "https://tamduc-cardio.com"
                         },
                         new
                         {
                             Id = 5,
                             Address = "147 Điện Biên Phủ, Quận Bình Thạnh, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5402),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5331),
                             Description = "Chuyên khoa mắt với các dịch vụ khám và điều trị về mắt",
                             Email = "care@anhsang-eye.com",
                             ImageUrl = "https://example.com/images/clinic5.jpg",
@@ -624,14 +630,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Mắt Ánh Sáng",
                             OpeningHours = "7:30 - 17:00",
                             Phone = "028.7567.8901",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5403),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5331),
                             Website = "https://anhsang-eye.com"
                         },
                         new
                         {
                             Id = 6,
                             Address = "258 Cao Thắng, Quận 3, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5405),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5334),
                             Description = "Chăm sóc răng miệng toàn diện với công nghệ nha khoa tiên tiến",
                             Email = "info@nucuoi-dental.com",
                             ImageUrl = "https://example.com/images/clinic6.jpg",
@@ -639,14 +645,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Răng Hàm Mặt Nụ Cười",
                             OpeningHours = "8:00 - 20:00",
                             Phone = "028.7678.9012",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5405),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5335),
                             Website = "https://nucuoi-dental.com"
                         },
                         new
                         {
                             Id = 7,
                             Address = "369 Nguyễn Thị Minh Khai, Quận 1, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5408),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5337),
                             Description = "Phòng khám đa khoa với đầy đủ các chuyên khoa",
                             Email = "contact@suckhoe-clinic.com",
                             ImageUrl = "https://example.com/images/clinic7.jpg",
@@ -654,14 +660,14 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Đa Khoa Sức Khỏe",
                             OpeningHours = "7:00 - 21:00",
                             Phone = "028.7789.0123",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5408),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5338),
                             Website = "https://suckhoe-clinic.com"
                         },
                         new
                         {
                             Id = 8,
                             Address = "486 Lê Quang Định, Quận Bình Thạnh, TP.HCM",
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5410),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5340),
                             Description = "Chuyên điều trị các bệnh lý về cơ xương khớp",
                             Email = "info@vandong-clinic.com",
                             ImageUrl = "https://example.com/images/clinic8.jpg",
@@ -669,7 +675,7 @@ namespace MedicalAppointmentAPI.Migrations
                             Name = "Phòng Khám Cơ Xương Khớp Vận Động",
                             OpeningHours = "8:00 - 17:30",
                             Phone = "028.7890.1234",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(5411),
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(5340),
                             Website = "https://vandong-clinic.com"
                         });
                 });
@@ -689,7 +695,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
@@ -704,7 +710,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("time");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<int>("WeekDayId")
                         .HasColumnType("int");
@@ -737,7 +743,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Diagnosis")
                         .IsRequired()
@@ -776,7 +782,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.HasKey("Id");
 
@@ -808,7 +814,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<DateTime?>("InsuranceExpiryDate")
                         .HasColumnType("datetime2");
@@ -820,7 +826,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -845,7 +851,7 @@ namespace MedicalAppointmentAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Diagnosis")
                         .HasMaxLength(500)
@@ -881,7 +887,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.HasKey("Id");
 
@@ -903,7 +909,7 @@ namespace MedicalAppointmentAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Dosage")
                         .IsRequired()
@@ -945,7 +951,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Usage")
                         .IsRequired()
@@ -971,7 +977,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -990,7 +996,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.HasKey("Id");
 
@@ -1002,110 +1008,110 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(54),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(416),
                             Description = "Khám và điều trị các bệnh lý nội khoa tổng quát",
                             IsActive = true,
                             Name = "Nội Tổng Quát",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(55)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(417)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(257),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(627),
                             Description = "Chẩn đoán và điều trị các bệnh về tim mạch",
                             IsActive = true,
                             Name = "Tim Mạch",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(258)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(627)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(260),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(629),
                             Description = "Khám và điều trị các bệnh về hệ thần kinh",
                             IsActive = true,
                             Name = "Thần Kinh",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(260)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(630)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(261),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(631),
                             Description = "Chăm sóc sức khỏe trẻ em từ sơ sinh đến 15 tuổi",
                             IsActive = true,
                             Name = "Nhi Khoa",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(262)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(631)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(263),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(632),
                             Description = "Chăm sóc sức khỏe phụ nữ và thai sản",
                             IsActive = true,
                             Name = "Sản Phụ Khoa",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(263)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(633)
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(265),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(634),
                             Description = "Khám và điều trị các bệnh về tai, mũi, họng",
                             IsActive = true,
                             Name = "Tai Mũi Họng",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(265)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(634)
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(266),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(636),
                             Description = "Khám và điều trị các bệnh về mắt",
                             IsActive = true,
                             Name = "Mắt",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(267)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(636)
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(268),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(638),
                             Description = "Khám và điều trị các bệnh về da",
                             IsActive = true,
                             Name = "Da Liễu",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(268)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(638)
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(270),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(639),
                             Description = "Khám và điều trị các bệnh về xương khớp",
                             IsActive = true,
                             Name = "Cơ Xương Khớp",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(270)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(639)
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(271),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(641),
                             Description = "Khám và điều trị các bệnh về đường tiêu hóa",
                             IsActive = true,
                             Name = "Tiêu Hóa",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(272)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(641)
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(273),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(642),
                             Description = "Khám và điều trị các bệnh về đường hô hấp",
                             IsActive = true,
                             Name = "Hô Hấp",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(273)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(642)
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(274),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(644),
                             Description = "Khám và điều trị các bệnh về nội tiết, đái tháo đường",
                             IsActive = true,
                             Name = "Nội Tiết",
-                            UpdatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 770, DateTimeKind.Utc).AddTicks(275)
+                            UpdatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 611, DateTimeKind.Utc).AddTicks(644)
                         });
                 });
 
@@ -1118,7 +1124,7 @@ namespace MedicalAppointmentAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -1137,7 +1143,7 @@ namespace MedicalAppointmentAPI.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("ViName")
                         .IsRequired()
@@ -1152,7 +1158,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2192),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2850),
                             IsActive = true,
                             IsWeekend = false,
                             Name = "Monday",
@@ -1162,7 +1168,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2286),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2951),
                             IsActive = true,
                             IsWeekend = false,
                             Name = "Tuesday",
@@ -1172,7 +1178,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2288),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2953),
                             IsActive = true,
                             IsWeekend = false,
                             Name = "Wednesday",
@@ -1182,7 +1188,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2289),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2955),
                             IsActive = true,
                             IsWeekend = false,
                             Name = "Thursday",
@@ -1192,7 +1198,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2291),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2956),
                             IsActive = true,
                             IsWeekend = false,
                             Name = "Friday",
@@ -1202,7 +1208,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2292),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2957),
                             IsActive = true,
                             IsWeekend = true,
                             Name = "Saturday",
@@ -1212,7 +1218,7 @@ namespace MedicalAppointmentAPI.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 2, 6, 15, 9, 58, 769, DateTimeKind.Utc).AddTicks(2293),
+                            CreatedAt = new DateTime(2025, 2, 9, 16, 53, 19, 610, DateTimeKind.Utc).AddTicks(2959),
                             IsActive = true,
                             IsWeekend = true,
                             Name = "Sunday",

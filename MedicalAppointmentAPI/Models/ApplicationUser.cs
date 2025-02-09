@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using MedicalAppointmentAPI.Common.Enums;
 using Microsoft.AspNetCore.Identity;
 using Models;
 
@@ -20,16 +22,21 @@ public class ApplicationUser : IdentityUser
   public string? AvatarUrl { get; set; }
   [Required(ErrorMessage = "Date of birth is required")]
   [Display(Name = "Date of Birth")]
+  [Column(TypeName = "datetime2(0)")]
   public DateTime DateOfBirth { get; set; }
   [Required(ErrorMessage = "Gender is required")]
   [Display(Name = "Gender")]
-  public string Gender { get; set; } = string.Empty;
+  public Gender Gender { get; set; }
   public string Address { get; set; } = string.Empty;
   public bool IsActive { get; set; }
+  [Column(TypeName = "datetime2(0)")]
   public DateTime CreatedAt { get; set; }
+  [Column(TypeName = "datetime2(0)")]
   public DateTime? UpdatedAt { get; set; }
   public string? RefreshToken { get; set; }
+  [Column(TypeName = "datetime2(0)")]
   public DateTime? RefreshTokenExpiryTime { get; set; }
+
 
   // Helper properties
   public string FullName => $"{FirstName} {LastName}";
