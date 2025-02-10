@@ -13,4 +13,6 @@ public interface IAuthService
   Task<AuthResponse> Logout(string refreshToken);
   Task<bool> RevokeTokenAsync(string userId);
   Task<bool> ValidateTokenAsync(string token);
+  Task<bool> SendEmailConfirmationAsync(string email, string confirmationLink);
+  Task<bool> SendPasswordResetAsync(string email, string resetLink);
 }

@@ -1,4 +1,5 @@
 using System.Text;
+using Common.Configurations;
 using Common.Configurations.Interfaces;
 using MedicalAppointmentAPI.Common.Configurations;
 using MedicalAppointmentAPI.Common.Constants;
@@ -40,6 +41,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddScoped<IJwtSettings, JwtConfig>();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailSettings, EmailSettings>();
+
 //Add Identity 
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -62,7 +66,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 //Configure JWT Authentication
-var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var jwtSettings = builder.Configuration.GetSection("Jw`tSettings");
 var secretKey = jwtSettings["SecretKey"];
 
 if (string.IsNullOrEmpty(secretKey))

@@ -20,4 +20,15 @@ public static class SystemConstants
     public const int MinPasswordLength = 8;
     public const string PhoneNumberRegex = @"^\+?[1-9]\d{1,14}$";
   }
+  public static class Email
+  {
+    public const string SmtpServer = "smtp.gmail.com";
+    public const int SmtpPort = 587;
+    public const string SmtpUsername = "lehieunghia2402@gmail.com";
+    public const string SmtpPassword = "nguyenvanphuc123";
+    public const string FromEmail = "lehieunghia2402@gmail.com";
+    public const string FromName = "Medical Appointment System";
+    public const bool EnableSsl = true;
+  }
+
 }

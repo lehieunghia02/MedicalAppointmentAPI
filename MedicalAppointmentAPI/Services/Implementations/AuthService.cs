@@ -188,4 +188,13 @@ public class AuthService : IAuthService
   {
     throw new NotImplementedException();
   }
+  public Task<bool> SendEmailConfirmationAsync(string email, string confirmationLink)
+  {
+    // var confirmationLink = $"{_configuration["FrontendUrl"]}/confirm-email?token={confirmationToken}";
+    return null;
+  }
+  public Task<bool> SendPasswordResetAsync(string email, string resetLink)
+  {
+    throw new NotImplementedException();
+  }
 }
