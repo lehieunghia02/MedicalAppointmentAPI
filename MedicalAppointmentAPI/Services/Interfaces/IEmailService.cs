@@ -1,8 +1,8 @@
-namespace Services.Interfaces;
+namespace MedicalAppointmentAPI.Services.Interfaces;
 
 public interface IEmailService
 {
-  Task SendEmailAsync(string to, string subject, string body, bool isHtml = false);
-  Task SendEmailConfirmationAsync(string to, string confirmationLink);
+  Task SendEmailAsync(string to, string subject, string body, bool isHtml = true);
+  Task SendEmailConfirmationAsync(string email, string confirmationLink);
   Task SendPasswordResetAsync(string email, string resetLink);
 }

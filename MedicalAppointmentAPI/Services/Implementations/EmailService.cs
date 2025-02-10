@@ -2,7 +2,10 @@ using Common.Configurations.Interfaces;
 using MimeKit;
 using MimeKit.Text;
 using MailKit.Net.Smtp;
-using Services.Interfaces;
+using MailKit.Security;
+using MedicalAppointmentAPI.Services.Interfaces;
+
+namespace MedicalAppointmentAPI.Services.Implementations;
 
 public class EmailService : IEmailService
 {
@@ -30,15 +33,21 @@ public class EmailService : IEmailService
       };
 
       using var client = new SmtpClient();
-      await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.SmtpPort, _emailSettings.EnableSsl);
+      await client.ConnectAsync(
+        _emailSettings.SmtpServer,
+        _emailSettings.SmtpPort,
+        SecureSocketOptions.StartTls
+      );
       await client.AuthenticateAsync(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword);
       await client.SendAsync(message);
       await client.DisconnectAsync(true);
+
+      _logger.LogInformation("Email sent successfully to {Email}", to);
     }
     catch (Exception ex)
     {
-      _logger.LogError(ex, "Error sending email to {Email}", to);
-      throw;
+      _logger.LogError(ex, "Failed to send email to {Email}. Error: {Error}", to, ex.Message);
+      throw new Exception($"Failed to send email: {ex.Message}", ex);
     }
   }
 
