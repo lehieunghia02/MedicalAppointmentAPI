@@ -3,6 +3,8 @@ using Common.Configurations.Interfaces;
 using MedicalAppointmentAPI.Common.Configurations;
 using MedicalAppointmentAPI.Common.Constants;
 using MedicalAppointmentAPI.Data;
+using MedicalAppointmentAPI.Middleware;
+
 using MedicalAppointmentAPI.Models;
 using MedicalAppointmentAPI.Repositories.Implementations;
 using MedicalAppointmentAPI.Repositories.Interfaces;
@@ -26,7 +28,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Medical Appointment API",
-        Version = "v1"
+        Version = "v1",
+        Description = "API for managing medical appointments"
     });
 });
 
@@ -107,4 +110,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseNotFoundHandler();
 app.Run();
