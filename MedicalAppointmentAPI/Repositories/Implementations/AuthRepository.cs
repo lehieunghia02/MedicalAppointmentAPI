@@ -3,7 +3,6 @@ using MedicalAppointmentAPI.Models;
 using MedicalAppointmentAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Models;
 
 namespace MedicalAppointmentAPI.Repositories.Implementations;
@@ -95,9 +94,9 @@ public class AuthRepository : IAuthRepository
     return result.Succeeded;
   }
 
-  public async Task<bool> RevokeRefreshTokenAsync(string userId)
+  public async Task<bool> RevokeRefreshTokenAsync(string token)
   {
-    var user = await GetUserByIdAsync(userId);
+    var user = await GetUserByIdAsync(token);
     if (user == null) return false;
 
     user.RefreshToken = null;
@@ -139,4 +138,11 @@ public class AuthRepository : IAuthRepository
     await _context.SaveChangesAsync();
     return doctor;
   }
+  public async Task<bool> UpdatePatientProfileAsync(Patient patient)
+  {
+    _context.Patients.Update(patient);
+    await _context.SaveChangesAsync();
+    return true;
+  }
+
 }

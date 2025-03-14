@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\medicalappointmentapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\services\\implementations\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\services\\implementations\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|d:\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi\\medicalappointmentapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4ACA9826-2874-41DC-8C77-A92CAD893A09}|MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj|solutionrelative:medicalappointmentapi\\medicalappointmentapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,28 +43,75 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "MedicalAppointmentAPI\\appsettings.json",
+              "ToolTip": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\appsettings.json",
+              "RelativeToolTip": "MedicalAppointmentAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-19T18:21:23.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Program.cs",
+              "RelativeDocumentMoniker": "MedicalAppointmentAPI\\Program.cs",
+              "ToolTip": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Program.cs",
+              "RelativeToolTip": "MedicalAppointmentAPI\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T14:31:14.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppointmentsController.cs",
+              "DocumentMoniker": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Controllers\\AppointmentsController.cs",
+              "RelativeDocumentMoniker": "MedicalAppointmentAPI\\Controllers\\AppointmentsController.cs",
+              "ToolTip": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Controllers\\AppointmentsController.cs",
+              "RelativeToolTip": "MedicalAppointmentAPI\\Controllers\\AppointmentsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T14:29:48.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Services\\Implementations\\AuthService.cs",
+              "RelativeDocumentMoniker": "MedicalAppointmentAPI\\Services\\Implementations\\AuthService.cs",
+              "ToolTip": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Services\\Implementations\\AuthService.cs",
+              "RelativeToolTip": "MedicalAppointmentAPI\\Services\\Implementations\\AuthService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T02:46:38.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "MedicalAppointmentAPI\\Controllers\\AuthController.cs",
               "ToolTip": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\Controllers\\AuthController.cs",
               "RelativeToolTip": "MedicalAppointmentAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAIwJAAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T02:25:57.755Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-07T02:25:57.755Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MedicalAppointmentAPI",
+              "DocumentIndex": 5,
+              "Title": "MedicalAppointmentAPI.csproj",
               "DocumentMoniker": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj",
               "RelativeDocumentMoniker": "MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj",
               "ToolTip": "D:\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj",
               "RelativeToolTip": "MedicalAppointmentAPI\\MedicalAppointmentAPI.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-07T02:01:43.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-07T02:01:43.528Z"
             }
           ]
         }

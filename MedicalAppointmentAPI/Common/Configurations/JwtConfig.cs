@@ -15,11 +15,11 @@ public class JwtConfig : IJwtSettings
   public string Issuer => _configuration["JwtSettings:Issuer"]!;
   public string Audience => _configuration["JwtSettings:Audience"]!;
   public int AccessTokenExpirationMinutes => Convert.ToInt32(_configuration["JwtSettings:AccessTokenExpirationMinutes"]);
-  public int RefreshTokenValidityDays => Convert.ToInt32(_configuration["JwtSettings:RefreshTokenValidityDays"]);
+  public int RefreshTokenValidityDays => Convert.ToInt32(_configuration["JwtSettings:RefreshTokenExpirationMinutes"]) / (60 * 24); // Convert minutes to days
 
   public SigningCredentials GetSigningCredentials()
   {
-    var key = Encoding.ASCII.GetBytes(SecretKey);
+    var key = Encoding.UTF8.GetBytes(SecretKey);
     return new SigningCredentials(
         new SymmetricSecurityKey(key),
         SecurityAlgorithms.HmacSha256Signature
@@ -30,16 +30,16 @@ public class JwtConfig : IJwtSettings
   {
     return new TokenValidationParameters
     {
-      ValidateIssuer = true,
-      ValidateAudience = true,
+      ValidateIssuer = false,
+      ValidateAudience = false,
       ValidateLifetime = true,
       ValidateIssuerSigningKey = true,
-      ValidIssuer = Issuer,
-      ValidAudience = Audience,
       IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.ASCII.GetBytes(SecretKey)
+            Encoding.UTF8.GetBytes(SecretKey)
         ),
-      ClockSkew = TimeSpan.Zero
+      ClockSkew = TimeSpan.Zero,
+      RequireSignedTokens = true,
+      RequireExpirationTime = true
     };
   }
 }

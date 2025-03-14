@@ -30,5 +30,34 @@ public static class SystemConstants
     public const string FromName = "Medical Appointment System";
     public const bool EnableSsl = true;
   }
+   public static class Roles
+  {
+    public const string SuperAdmin = "SuperAdmin";
+    public const string Admin = "Admin";
+    public const string Doctor = "Doctor";
+    public const string Patient = "Patient";
+    public const string Receptionist = "Receptionist";
+    public const string Pharmacist = "Pharmacist";
+
+    public static readonly IReadOnlyCollection<string> All = new[]
+    {
+      SuperAdmin,
+      Admin,
+      Doctor,
+      Patient,
+      Receptionist,
+      Pharmacist
+    };
+  }
+    public static class Policies 
+  {
+    public const string RequireSuperAdmin = "RequireSuperAdmin";
+    public const string RequireAdmin = "RequireAdmin";
+    public const string RequireDoctor = "RequireDoctor";
+    public const string RequirePatient = "RequirePatient";
+    public const string RequireReceptionist = "RequireReceptionist";
+    public const string RequirePharmacist = "RequirePharmacist";
+  }   
+  
 
 }

@@ -1,14 +1,17 @@
 using System.Runtime.CompilerServices;
 using MedicalAppointmentAPI.DTOs.Auth;
+using MedicalAppointmentAPI.DTOs.Auth.Request;
 using MedicalAppointmentAPI.DTOs.Patients;
 using MedicalAppointmentAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace MedicalAppointmentAPI.Controllers;
 
+[AllowAnonymous]
 [ApiController]
-[Route("api/auth")]
+[Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
   private readonly IAuthService _authService;
@@ -28,7 +31,7 @@ public class AuthController : ControllerBase
   {
     try
     {
-      var result = await _authService.Login(request);
+      var result = await _authService.LoginAsync(request);
       return Ok(result);
     }
     catch (UnauthorizedAccessException ex) when (ex.Message.Contains("confirm your email"))
@@ -96,7 +99,11 @@ public class AuthController : ControllerBase
     }
   }
 
-
+  /// <summary>
+  /// Register for a new patient account
+  /// </summary>
+  /// <param name="request"></param>
+  /// <returns></returns>
   [HttpPost("register-patient")]
   [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -104,25 +111,26 @@ public class AuthController : ControllerBase
   {
     try
     {
-      var response = await _authService.RegisterPatient(request);
+      var response = await _authService.RegisterPatientAsync(request);
       return Ok(response);
     }
     catch (Exception ex)
     {
-      _logger.LogError(ex, "Error occurred while registering patient with email: {Email}", request.Email);
       return BadRequest(new { message = ex.Message });
     }
   }
-
+  
+  /// <summary>
+  /// Controllers for refreshing token
+  /// </summary>
+  /// <param name="refreshToken"></param>
+  /// <returns></returns>
   [HttpPost("refresh-token")]
-  [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status200OK)]
-  [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  [ProducesResponseType(StatusCodes.Status401Unauthorized)]
   public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
   {
     try
     {
-      var response = await _authService.RefreshToken(refreshToken);
+      var response = await _authService.RefreshTokenAsync(refreshToken);
       return Ok(response);
     }
     catch (Exception ex)
@@ -131,58 +139,75 @@ public class AuthController : ControllerBase
       return BadRequest(new { message = ex.Message });
     }
   }
-
-  [Authorize]
+  
   [HttpPost("logout")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-  public async Task<IActionResult> Logout(string refreshToken)
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<IActionResult> Logout()
   {
     try
     {
-      await _authService.Logout(refreshToken);
-      return Ok(new { message = "Logout sucessful" });
+      var token = Request.Headers["Authorization"].ToString().Split(" ")[1];
+      var result = await _authService.Logout(token);
+      if (!result.Succeeded)
+      {
+        return BadRequest(new LogoutResponse
+        {
+          Status = 400,
+          Message = "Đăng xuất thất bại",
+          Data = new LogoutResponse.LogoutData
+          {
+            Succeeded = false,
+            Message = result.Message,
+            LogoutTime = result.LogoutTime
+          }
+        });
+      }
+      return Ok(new LogoutResponse
+      {
+        Status = 200,
+        Message = "Logout successfully",
+        Data = new LogoutResponse.LogoutData
+        {
+          Succeeded = true,
+          Message = "Đăng xuất thành công",
+          LogoutTime = result.LogoutTime
+        }
+      });
     }
     catch (Exception ex)
     {
       _logger.LogError(ex, "Error occurred while logging out");
-      return BadRequest(new { message = ex.Message });
+      return StatusCode(StatusCodes.Status500InternalServerError, new
+      {
+        status = 500,
+        message = "Đã xảy ra lỗi trong quá trình đăng xuất",
+        errors = new { general = "Vui lòng thử lại sau hoặc liên hệ hỗ trợ nếu vấn đề vẫn tiếp tục." }
+      });
     }
   }
 
-  // [HttpPost("resend-confirmation-email")]
-  // [ProducesResponseType(StatusCodes.Status200OK)]
-  // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  // public async Task<IActionResult> ResendConfirmationEmail([FromBody] string email)
-  // {
-  //   try
-  //   {
-  //     await _authService.ResendConfirmationEmail(email);
-  //     return Ok(new
-  //     {
-  //       status = 200,
-  //       message = "Đã gửi lại email xác thực",
-  //       details = "Vui lòng kiểm tra hộp thư (bao gồm cả thư rác) và làm theo hướng dẫn trong email."
-  //     });
-  //   }
-  //   catch (InvalidOperationException ex) when (ex.Message.Contains("already confirmed"))
-  //   {
-  //     return BadRequest(new
-  //     {
-  //       status = 400,
-  //       message = "Email đã được xác thực",
-  //       errors = new { email = "Email này đã được xác thực trước đó. Bạn có thể đăng nhập bình thường." }
-  //     });
-  //   }
-  //   catch (Exception ex)
-  //   {
-  //     _logger.LogError(ex, "Error sending confirmation email to {Email}", email);
-  //     return BadRequest(new
-  //     {
-  //       status = 400,
-  //       message = "Không thể gửi email xác thực",
-  //       errors = new { email = "Đã xảy ra lỗi khi gửi email xác thực. Vui lòng thử lại sau." }
-  //     });
-  //   }
-  // }
+  [HttpPost("revoke-token")]
+  public async Task<IActionResult> RevokeToken([FromBody] string token)
+  {
+    try
+    {
+      var result = await _authService.RevokeTokenAsync(token);
+      if (result)
+      {
+        return Ok(new {message = "Revoke token successfully"});
+      }
+      else
+      {
+        
+        return BadRequest(new {message = "Revoke token failed"});
+      }
+      
+    }
+    catch (Exception e)
+    {
+      return BadRequest(new { message = e.Message });
+    }
+  }
 }

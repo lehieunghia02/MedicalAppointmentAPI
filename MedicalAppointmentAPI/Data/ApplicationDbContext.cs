@@ -37,7 +37,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
             //Indexes for UserName and Email 
             entity.HasIndex(e => e.UserName).IsUnique();
+            entity.HasIndex(e => e.Email).IsUnique();
             entity.HasIndex(e => e.RefreshToken).IsUnique();
+            entity.HasIndex(e => e.PhoneNumber).IsUnique();
         });
         // Configure Doctor relationships
         builder.Entity<Doctor>(entity =>
@@ -67,7 +69,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         // Configure Patient relationships
         builder.Entity<Patient>(entity =>
         {
-            entity.HasIndex(p => p.InsuranceNumber); // đánh index cho số bảo hiểm
+            entity.HasIndex(p => p.InsuranceNumber);
+            entity.HasIndex(p => p.UserId).IsUnique();
             entity.HasOne(p => p.User)
                 .WithOne(u => u.Patient)
                 .HasForeignKey<Patient>(p => p.UserId)

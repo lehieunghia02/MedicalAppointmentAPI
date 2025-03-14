@@ -1,8 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Common.Configurations.Interfaces;
+using HospitalManagement.DTOs.Patients;
 using MedicalAppointmentAPI.Common.Configurations;
 using MedicalAppointmentAPI.Common.Constants;
 using MedicalAppointmentAPI.DTOs.Auth;
@@ -24,7 +26,10 @@ public class AuthService : IAuthService
   private readonly IJwtSettings _jwtSettings;
 
 
-  public AuthService(IAuthRepository authRepository, IConfiguration configuration, ILogger<AuthService> logger, IJwtSettings jwtSettings)
+  public AuthService(IAuthRepository authRepository, 
+    IConfiguration configuration, 
+    ILogger<AuthService> logger, 
+    IJwtSettings jwtSettings)
   {
     _authRepository = authRepository;
     _configuration = configuration;
@@ -32,7 +37,7 @@ public class AuthService : IAuthService
     _jwtSettings = jwtSettings;
   }
 
-  public async Task<AuthResponse> Login(LoginRequest request)
+  public async Task<AuthResponse> LoginAsync(LoginRequest request)
   {
     var user = await _authRepository.GetUserByEmailAsync(request.Email);
     if (user == null)
@@ -61,7 +66,6 @@ public class AuthService : IAuthService
     var roles = await _authRepository.GetUserRolesAsync(user);
     // Generate JWT token
     var tokenHandler = new JwtSecurityTokenHandler();
-    var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
     var tokenDescriptor = new SecurityTokenDescriptor
     {
       Subject = new ClaimsIdentity(new[]
@@ -88,8 +92,6 @@ public class AuthService : IAuthService
     // Save refresh token
     await _authRepository.UpdateRefreshTokenAsync(user, refreshToken, refreshTokenExpiryTime);
 
-    // Save refresh token
-    await _authRepository.UpdateRefreshTokenAsync(user, refreshToken, refreshTokenExpiryTime);
 
     // Create and return response
     return new AuthResponse
@@ -116,15 +118,19 @@ public class AuthService : IAuthService
     };
   }
 
-  public async Task<AuthResponse> Register(RegisterRequest request)
+  //Đăng ký tài khoản bệnh nhân
+  public async Task<AuthResponse> RegisterPatientAsync(RegisterPatientRequest request)
   {
-    throw new NotImplementedException();
-  }
-  public async Task<AuthResponse> RegisterPatient(RegisterPatientRequest request)
-  {
+    //Check if email is already in use
+    var existingUser = await _authRepository.GetUserByEmailAsync(request.Email);
+    if (existingUser != null)
+    {
+      throw new Exception("Email already in use");
+    }
+    // Create new user
     var user = new ApplicationUser
     {
-      UserName = request.Email,
+      UserName = request.Username,
       Email = request.Email,
       FirstName = request.FirstName,
       LastName = request.LastName,
@@ -135,27 +141,23 @@ public class AuthService : IAuthService
       CreatedAt = DateTime.UtcNow,
       IsActive = true
     };
-
-    var result = await _authRepository.CreateUserAsync(user, request.Password);
-    if (!result.Succeeded)
+    _logger.LogInformation("Creating user: {User}", user);
+    _logger.LogInformation("Created new user with email: {Email}", request.Email);
+    _logger.LogInformation("Create user with user name: {Username}", request.Username);
+    var newUserResult = await _authRepository.CreateUserAsync(user, request.Password);
+    if (!newUserResult.Succeeded)
     {
-      throw new Exception(result.Errors.FirstOrDefault()?.Description ?? "Failed to create user");
+      throw new Exception(newUserResult.Errors.FirstOrDefault()?.Description ?? "Failed to create user");
     }
 
-    // Create patient profile
+    // Create instance of patient
     var patient = new Patient
     {
       UserId = user.Id,
-      BloodType = request.BloodType,
-      Allergies = request.Allergies,
-      ChronicDiseases = request.ChronicDiseases,
-      InsuranceNumber = request.InsuranceNumber,
-      InsuranceProvider = request.InsuranceProvider,
-      InsuranceExpiryDate = request.InsuranceExpiryDate,
       CreatedAt = DateTime.UtcNow
     };
     await _authRepository.CreatePatientProfileAsync(patient);
-    await _authRepository.AddToRoleAsync(user, "Patient");
+    await _authRepository.AddToRoleAsync(user, SystemConstants.Roles.Patient);
     return new AuthResponse
     {
       User = new AuthResponse.UserInfo
@@ -164,24 +166,56 @@ public class AuthService : IAuthService
         Email = user.Email,
         FirstName = user.FirstName,
         LastName = user.LastName,
-        PhoneNumber = user.PhoneNumber,
-
+        PhoneNumber = user.PhoneNumber ?? string.Empty,
+        AvatarUrl = user.AvatarUrl ?? string.Empty,
+        Roles = new List<string> { SystemConstants.Roles.Patient }
       }
     };
   }
-  public Task<AuthResponse> RefreshToken(string refreshToken)
+  public Task<AuthResponse> RefreshTokenAsync(string refreshToken)
   {
     throw new NotImplementedException();
   }
-
-  public Task<AuthResponse> Logout(string refreshToken)
+  //Function logout 
+  public async Task<LogoutResponse.LogoutData> Logout(string refreshToken)
   {
-    throw new NotImplementedException();
+    try
+    {
+      var result = await _authRepository.RevokeRefreshTokenAsync(refreshToken);
+      if (!result)
+      {
+        return new LogoutResponse.LogoutData
+        {
+          Succeeded = false,
+          Message = "Token is invalid or token is expired"
+        };
+      }
+      return new LogoutResponse.LogoutData
+      {
+        Succeeded = true,
+        Message = "Logout successfully"
+      };
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError(ex, "Error occurred while logging out");
+      throw;
+    }
   }
+  //Function revoke token 
 
-  public Task<bool> RevokeTokenAsync(string userId)
+  public async Task<bool> RevokeTokenAsync(string token)
   {
-    throw new NotImplementedException();
+    try
+    {
+      var result = await _authRepository.RevokeRefreshTokenAsync(token);
+      return true; 
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError(ex, "Error occurred while revoking token");
+      return false; 
+    }
   }
 
   public Task<bool> ValidateTokenAsync(string token)
@@ -190,11 +224,32 @@ public class AuthService : IAuthService
   }
   public Task<bool> SendEmailConfirmationAsync(string email, string confirmationLink)
   {
-    // var confirmationLink = $"{_configuration["FrontendUrl"]}/confirm-email?token={confirmationToken}";
-    return null;
+    throw new NotImplementedException();
   }
   public Task<bool> SendPasswordResetAsync(string email, string resetLink)
   {
     throw new NotImplementedException();
+  }
+  public async Task<AuthResponse.PatientInfo> UpdatePatient(string userId, UpdatePatientRequest request)
+  {
+    var patient = await _authRepository.GetPatientByUserIdAsync(userId);
+    if (patient == null)
+    {
+      throw new Exception("Không tìm thấy bệnh nhân");
+    }
+    patient.BloodType = request.BloodType;
+    patient.Allergies = request.Allergies;
+    patient.ChronicDiseases = request.ChronicDiseases;
+    patient.InsuranceNumber = request.InsuranceNumber;
+    await _authRepository.UpdatePatientProfileAsync(patient);
+    return new AuthResponse.PatientInfo
+    {
+      Id = patient.Id.ToString(),
+      BloodType = patient.BloodType,
+      Allergies = patient.Allergies,
+      ChronicDiseases = patient.ChronicDiseases,
+      InsuranceNumber = patient.InsuranceNumber,
+      InsuranceExpiryDate = patient.InsuranceExpiryDate ?? DateTime.MinValue
+    };
   }
 }

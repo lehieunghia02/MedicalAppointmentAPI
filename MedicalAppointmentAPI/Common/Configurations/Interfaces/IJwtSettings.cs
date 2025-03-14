@@ -1,6 +1,6 @@
 using Microsoft.IdentityModel.Tokens;
 
-namespace Common.Configurations.Interfaces;
+namespace Common.Configurations.Interfaces; 
 
 public interface IJwtSettings
 {

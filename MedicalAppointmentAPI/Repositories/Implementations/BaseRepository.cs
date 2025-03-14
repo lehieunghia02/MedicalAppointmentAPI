@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
 using MedicalAppointmentAPI.Data;
 using MedicalAppointmentAPI.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalAppointmentAPI.Repositories.Implementations;
@@ -10,11 +9,13 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 {
   protected readonly ApplicationDbContext _context;
   protected readonly DbSet<TEntity> _dbSet;
-  public BaseRepository(ApplicationDbContext context, DbSet<TEntity> dbSet)
+
+  public BaseRepository(ApplicationDbContext context)
   {
     _context = context;
     _dbSet = _context.Set<TEntity>();
   }
+
   public virtual async Task<TEntity> AddAsync(TEntity entity)
   {
     await _dbSet.AddAsync(entity);
