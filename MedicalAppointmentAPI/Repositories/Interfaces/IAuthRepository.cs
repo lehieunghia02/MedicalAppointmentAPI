@@ -25,14 +25,15 @@ public interface IAuthRepository
 
   // Token management
   Task<bool> UpdateRefreshTokenAsync(ApplicationUser user, string refreshToken, DateTime expiryTime);
-  Task<bool> RevokeRefreshTokenAsync(string userId);
+  Task<bool> RevokeRefreshTokenAsync(string token);
 
   // Patient specific
   Task<Patient?> GetPatientByUserIdAsync(string userId);
+  
   Task<Patient> CreatePatientProfileAsync(Patient patient);
 
   // Doctor specific
   Task<Doctor?> GetDoctorByUserIdAsync(string userId);
   Task<Doctor> CreateDoctorProfileAsync(Doctor doctor);
-
+  Task<bool> UpdatePatientProfileAsync(Patient patient);
 }

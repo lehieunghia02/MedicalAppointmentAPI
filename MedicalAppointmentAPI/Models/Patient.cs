@@ -7,8 +7,8 @@ public class Patient : BaseEntity
   public int Id { get; set; }
 
   //Khóa ngoại tới bảng ApplicationUser
-  public string UserId { get; set; }
-  public ApplicationUser User { get; set; }
+  public string UserId { get; set; } = string.Empty;
+  public ApplicationUser User { get; set; } = new ApplicationUser();
   //Nhóm máu
   public string? BloodType { get; set; }
   //Dị ứng 

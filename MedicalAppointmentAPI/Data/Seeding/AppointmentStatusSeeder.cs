@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Data.Seeding;
+
 public class AppointmentStatusSeeder
 {
   public static void Seed(ModelBuilder builder)

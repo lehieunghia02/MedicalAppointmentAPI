@@ -8,7 +8,7 @@ namespace MedicalAppointmentAPI.Models;
 
 public class ApplicationUser : IdentityUser
 {
-  //First name
+
   [Required(ErrorMessage = "First name is required")]
   [StringLength(50, MinimumLength = 2, ErrorMessage = "First name must be between 2 and 50 characters")]
   [Display(Name = "First Name")]
